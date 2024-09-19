@@ -1,6 +1,6 @@
 import {Box, Container, Flex, Link, Text} from "@radix-ui/themes";
 import {PeachflixLogo} from "@/components/ui/peachflix-logo.tsx";
-import {SearchField} from "@/app/features/search/components/search-field.tsx";
+import {SearchField} from "@/features/search/components/search-field.tsx";
 import {useSearchParams} from "react-router-dom";
 
 export const SearchResultsRoute = ()=>{
