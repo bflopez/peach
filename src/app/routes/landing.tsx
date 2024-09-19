@@ -1,32 +1,38 @@
-import { useState } from 'react'
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
+import {Box, Flex, TextField} from "@radix-ui/themes";
+import {MagnifyingGlassIcon} from "@radix-ui/react-icons";
+import peachflixLogo from "@/assets/peachflix-logo.svg"
+import {useState} from "react";
+import {useNavigate} from "react-router";
 
 export const LandingRoute = () => {
-    const [count, setCount] = useState(0)
-
+    const navigate = useNavigate()
+    const [searchQuery, setSearchQuery] = useState("")
+    const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>)=>{
+        if(event.key === "Enter"){
+            console.log(event.currentTarget.value)
+            navigate(`/search-results?q=${searchQuery}`)
+        }
+    }
+    const handleTyping = (event: React.ChangeEvent<HTMLInputElement>)=>{
+        setSearchQuery(event.currentTarget.value)
+    }
     return (
         <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank" rel="noreferrer">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
+            <Box py="100px">
+                <Flex direction="column" align="center" gap="5">
+                    <Box width="160px">
+                        <img src={peachflixLogo} alt="Peachflix logo"/>
+                    </Box>
+                    <Box width="240px">
+                        <TextField.Root type="text" variant="soft" placeholder="Search" size="3" value={searchQuery}
+                                        radius="medium" style={{backgroundColor: "rgb(0 0 0 / 30%)"}} onKeyDown={handleSearch} onChange={handleTyping}>
+                            <TextField.Slot>
+                                <MagnifyingGlassIcon height="18" width="18" />
+                            </TextField.Slot>
+                        </TextField.Root>
+                    </Box>
+                </Flex>
+            </Box>
         </>
     )
-};
+}
