@@ -1,4 +1,4 @@
-import {Box, Flex, TextField} from "@radix-ui/themes";
+import {Box, Container, Flex, TextField} from "@radix-ui/themes";
 import {MagnifyingGlassIcon} from "@radix-ui/react-icons";
 import peachflixLogo from "@/assets/peachflix-logo.svg"
 import {useState} from "react";
@@ -17,7 +17,7 @@ export const LandingRoute = () => {
         setSearchQuery(event.currentTarget.value)
     }
     return (
-        <>
+        <Container size="1">
             <Box py="100px">
                 <Flex direction="column" align="center" gap="5">
                     <Box width="160px">
@@ -33,6 +33,6 @@ export const LandingRoute = () => {
                     </Box>
                 </Flex>
             </Box>
-        </>
+        </Container>
     )
 }
