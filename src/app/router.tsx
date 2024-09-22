@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     {
         path: '/search-results',
         lazy: async () => {
-            const { SearchResultsRoute } = await import('./routes/search-results');
+            const { SearchResultsRoute } = await import('./routes/movie-search-results.tsx');
             return { Component: SearchResultsRoute };
         },
     },

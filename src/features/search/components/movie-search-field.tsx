@@ -3,7 +3,7 @@ import {MagnifyingGlassIcon} from "@radix-ui/react-icons";
 import {useNavigate} from "react-router";
 import {useState} from "react";
 
-export const SearchField = () => {
+export const MovieSearchField = () => {
     const navigate = useNavigate()
     const [searchQuery, setSearchQuery] = useState("")
     const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>)=>{
