@@ -2,22 +2,17 @@ import {Box, Container, Flex, Grid, Link, Text} from "@radix-ui/themes";
 import {PeachflixLogo} from "@/components/ui/peachflix-logo.tsx";
 import {SearchField} from "@/features/search/components/search-field.tsx";
 import {useSearchParams} from "react-router-dom";
-import {useQuery} from "@tanstack/react-query";
+import {useMovieSearchQuery} from "@/features/search/api/movie-search.ts";
 
 export const SearchResultsRoute = ()=>{
-    let [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const searchQuery = searchParams.get("q");
-    const {data: results, isLoading} = useQuery({
-        queryKey: ["search"],
-        queryFn: async (query: string) => {
-            const response = await fetch(`https://omdbapi.com/?s=${searchQuery}&apikey=d15d95d&type=movie`);
-            const results = await response.json();
-            return results.Search
-        }
-    })
+    const {data: movieSearchResults, isLoading } = useMovieSearchQuery({searchQuery: searchQuery || ""});
     if(isLoading){
         return <Text>Loading...</Text>
     }
+    console.log(movieSearchResults)
+    if(!movieSearchResults) return null;
     return(
         <>
             <Box pt="32px" px="32px">
@@ -36,7 +31,7 @@ export const SearchResultsRoute = ()=>{
                 <Container size="4">
                     <Text as="p" size="6" weight="medium" mb="4">{`Search results for "${searchQuery}"`}</Text>
                     <Grid columns="5" gapY="4" gapX="2" width="auto">
-                        {results.map((result, index) => (
+                        {movieSearchResults.Search.map((result) => (
                             <Box key={result.imdbID}>
                                 <img style={{height: "100%", objectFit: "cover", borderRadius: "8px"}} src={result.Poster}/>
                             </Box>

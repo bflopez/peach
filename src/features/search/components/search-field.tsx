@@ -8,7 +8,6 @@ export const SearchField = () => {
     const [searchQuery, setSearchQuery] = useState("")
     const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>)=>{
         if(event.key === "Enter"){
-            console.log(event.currentTarget.value)
             navigate(`/search-results?q=${searchQuery}`)
         }
     }

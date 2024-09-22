@@ -5,3 +5,8 @@ export const queryConfig = {
         staleTime: 1000 * 60 // 1 minute
     }
 };
+
+export type QueryConfig<T extends (...args: any[]) => any> = Omit<
+    ReturnType<T>,
+    'queryKey' | 'queryFn'
+>;
