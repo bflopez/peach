@@ -6,6 +6,9 @@ body{
 .radix-themes {
   --my-background-color: #252528;
   --color-background: var(--my-background-color);
+  --peachflix-brand-primary: #FD6E1D;
+  --orange-9: var(--peachflix-brand-primary);
+  --font-size-9: 80px
 }
 img {
   max-width: 100%;

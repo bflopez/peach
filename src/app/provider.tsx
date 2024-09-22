@@ -15,7 +15,7 @@ export const AppProvider = ({children}: AppProviderProps) =>{
     return (
         <>
             <QueryClientProvider client={queryClient}>
-                <Theme appearance="dark">
+                <Theme appearance="dark" accentColor="orange">
                     {children}
                 </Theme>
             </QueryClientProvider>

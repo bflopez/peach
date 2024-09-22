@@ -3,7 +3,7 @@ import {useQuery, queryOptions} from "@tanstack/react-query";
 import {QueryConfig} from "@/lib/tanstack-query.ts";
 import {MovieSearchResults} from "@/types/api.ts";
 
-export const movieSearch = async ({searchQuery}:{ searchQuery: string }): Promise<MovieSearchResults> => {
+export const getMovieSearch = async ({searchQuery}:{ searchQuery: string }): Promise<MovieSearchResults> => {
     const results = await OMDbAPI.get("", {params: {"type":"movie", "s": searchQuery}});
     return results.data
 }
@@ -11,7 +11,7 @@ export const movieSearch = async ({searchQuery}:{ searchQuery: string }): Promis
 export const movieSearchQueryOptions = (searchQuery: string) => {
     return queryOptions({
         queryKey: ['movie-search', searchQuery],
-        queryFn: () => movieSearch({searchQuery})
+        queryFn: () => getMovieSearch({searchQuery})
     })
 }
 
@@ -20,10 +20,7 @@ type useMovieSearchQueryOptions = {
     queryConfig?: QueryConfig<typeof movieSearchQueryOptions>
 }
 
-export const useMovieSearchQuery = ({
-    searchQuery,
-    queryConfig
-}: useMovieSearchQueryOptions) => {
+export const useMovieSearchQuery = ({searchQuery, queryConfig}: useMovieSearchQueryOptions) => {
     return useQuery({
         ...movieSearchQueryOptions(searchQuery),
         ...queryConfig
