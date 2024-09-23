@@ -3,27 +3,32 @@ import {useQuery, queryOptions} from "@tanstack/react-query";
 import {QueryConfig} from "@/lib/tanstack-query.ts";
 import {MovieSearchResults} from "@/types/api.ts";
 
-export const getMovieSearch = async ({searchQuery}:{ searchQuery: string }): Promise<MovieSearchResults> => {
-    const results = await OMDbAPI.get("", {params: {"type":"movie", "s": searchQuery}});
+type GetMovieSearchProps = {
+    searchQuery: string;
+    page: number;
+}
+export const getMovieSearch = async ({searchQuery, page}: GetMovieSearchProps): Promise<MovieSearchResults> => {
+    const results = await OMDbAPI.get("", {params: {"type":"movie", "s": searchQuery, "page": page}});
     return results.data
 }
 
-export const movieSearchQueryOptions = (searchQuery: string) => {
+export const movieSearchQueryOptions = ({searchQuery, page}: GetMovieSearchProps) => {
     return queryOptions({
-        queryKey: ['movie-search', searchQuery],
-        queryFn: () => getMovieSearch({searchQuery}),
+        queryKey: ['movie-search', searchQuery, page],
+        queryFn: () => getMovieSearch({searchQuery, page}),
         enabled: searchQuery.length > 0
     })
 }
 
 type useMovieSearchQueryOptions = {
     searchQuery: string;
+    page: number;
     queryConfig?: QueryConfig<typeof movieSearchQueryOptions>
 }
 
-export const useMovieSearchQuery = ({searchQuery, queryConfig}: useMovieSearchQueryOptions) => {
+export const useMovieSearchQuery = ({searchQuery, page, queryConfig}: useMovieSearchQueryOptions) => {
     return useQuery({
-        ...movieSearchQueryOptions(searchQuery),
+        ...movieSearchQueryOptions({searchQuery, page}),
         ...queryConfig
     })
 }
