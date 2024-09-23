@@ -7,11 +7,10 @@ import {ChevronLeftIcon, ChevronRightIcon} from "@radix-ui/react-icons";
 import {Pagination} from "react-headless-pagination";
 
 
-const MovieSearchResultsListLoading = ({searchQuery}: {searchQuery: string}) => (
+const MovieSearchResultsListLoading = () => (
     <>
-        <Text as="p" size="6" weight="medium" mb="4">{`Loading search results for "${searchQuery}"`}</Text>
         <Grid columns="5" gapY="4" gapX="2" width="auto">
-            {[...Array(10)].map((_element, index) => (<Skeleton key={index}><Box height="346px"></Box></Skeleton>))}
+            {[...Array(10)].map((_element, index) => (<Skeleton key={index}><Box height="352px"></Box></Skeleton>))}
         </Grid>
     </>
 )
@@ -38,7 +37,7 @@ export const MovieSearchResultsList = () => {
         setPage(page);
     };
 
-    if (isLoading) return <MovieSearchResultsListLoading searchQuery={searchQuery} />
+    if (isLoading) return <MovieSearchResultsListLoading />
     if(movieSearchResults?.Error) return <MovieSearchResultsListError errorText={movieSearchResults?.Error}/>
     if (!movieSearchResults?.Search) return null;
 
@@ -89,7 +88,7 @@ export const MovieSearchResultsList = () => {
                     <Pagination.NextButton className="pagination-button pagination-next" disabled={page === numPages}><ChevronRightIcon/></Pagination.NextButton>
                 </Pagination>
                 <Box>
-                    <Text size="1">{movieSearchResults.Search.length} of {movieSearchResults.totalResults} results</Text>
+                    <Text size="1">{(10 * page) + (movieSearchResults.Search.length)} of {movieSearchResults.totalResults} results</Text>
                 </Box>
             </Flex>
         </>
