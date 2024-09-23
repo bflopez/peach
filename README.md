@@ -9,7 +9,7 @@ First make sure you have an API key from https://www.omdbapi.com/apikey.aspx
 Create a .env.local file in your root and add your key. Similar to the `.env.local.example` file
 
 ```js
-VITE_OMBD_API_KEY = XXXXXXX
+VITE_OMBD_API_KEY=XXXXXXX
 ```
 
 Next install dependencies and run project
