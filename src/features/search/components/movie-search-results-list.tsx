@@ -22,6 +22,14 @@ export const MovieSearchResultsList = () => {
         setMovieDetailId(movieIMDbId)
     }
     if (isLoading) return <MovieSearchResultsListLoading searchQuery={searchQuery} />
+    if(movieSearchResults?.Response === "False"){
+        return (
+            <>
+                <Text as="p" size="6" weight="medium" mb="4">Error: {movieSearchResults.Error}</Text>
+                <Text as="p" weight="medium" mb="4">Check your search or try again.</Text>
+            </>
+        )
+    }
     if (!movieSearchResults?.Search) return null;
     return (
         <>

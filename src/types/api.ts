@@ -7,9 +7,10 @@ export type Movie = {
 }
 
 export type MovieSearchResults = {
-    Response: string;
-    Search: Movie[]
-    totalResults: string
+    Response: "True" | "False";
+    Search?: Movie[]
+    Error?: string
+    totalResults?: string
 }
 export type Ratings = {
     Source: string;
