@@ -67,15 +67,8 @@ export const MovieSearchResultsList = () => {
                 >
                     <Pagination.PrevButton className="pagination-button pagination-prev" disabled={page === 1}><ChevronLeftIcon width={"18px"} height={"18px"}/></Pagination.PrevButton>
 
-                    <nav style={{display: "flex", background: "#3E3E40"}}>
-                        <ul style={{display: "flex",
-                            listStyleType: "none",
-                            margin: 0,
-                            padding: 0,
-                            alignItems: "center",
-                            alignContent: "center",
-                            justifyContent: "center",
-                            height: "40px"}}>
+                    <nav className="pagination-nav">
+                        <ul className="pagination-button-container">
                             <Pagination.PageButton
                                 activeClassName="pagination-active"
                                 inactiveClassName=""

@@ -25,6 +25,20 @@ img {
   display: flex;
   margin-top: 24px;
 }
+.pagination nav{
+  display: flex;
+  background: #3E3E40;
+}
+.pagination-button-container{
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 40px;
+}
 .pagination-button{
   display: block;
   cursor: pointer;
