@@ -1,9 +1,19 @@
 import {Box, Button, Dialog, Flex, Text} from "@radix-ui/themes";
 import {StarFilledIcon, StarIcon} from "@radix-ui/react-icons";
 import {useMovieQuery} from "@/features/movie-detail/api/get-movie.ts";
+import {useLocalStorage} from "usehooks-ts";
 
 export const MovieDetailDialogContent = ({movieDetailId}: {movieDetailId:string}) => {
+    const [favorites, setFavorite] = useLocalStorage("peachflix-favorites", [] as string[]);
     const {data: movieDetails, isLoading} = useMovieQuery({movieIMDbId: movieDetailId})
+    const handleAddToFavorite = () => {
+        favorites.push(movieDetailId)
+        setFavorite(favorites)
+    }
+    const handleRemoveFromFavorite = () => {
+        favorites.splice(favorites.indexOf(movieDetailId), 1)
+        setFavorite(favorites)
+    }
     if(isLoading) { return <Dialog.Content><>Loading...</></Dialog.Content>}
     if(!movieDetails) return null
     return (
@@ -49,9 +59,13 @@ export const MovieDetailDialogContent = ({movieDetailId}: {movieDetailId:string}
                             <Button size="3" radius={"large"} style={{fontWeight: 600}}>Start watching</Button>
                         </Box>
                         <Box>
-                            <Button size="3" radius={"large"} variant="outline" style={{fontWeight: 600, color: "#FAFAFA", boxShadow: "inset 0 0 0 2px #FAFAFA"}}>
+                            {favorites.includes(movieDetails.imdbID) ?
+                                <Button size="3" radius={"large"} variant="outline" style={{fontWeight: 600, color: "#FAFAFA", boxShadow: "inset 0 0 0 2px #FAFAFA"}} onClick={handleRemoveFromFavorite}>
+                                    <StarFilledIcon height="19px" width="18px"/> Remove from favorites
+                                </Button>
+                                :<Button size="3" radius={"large"} variant="outline" style={{fontWeight: 600, color: "#FAFAFA", boxShadow: "inset 0 0 0 2px #FAFAFA"}} onClick={handleAddToFavorite}>
                                 <StarFilledIcon height="19px" width="18px"/> Add to favorites
-                            </Button>
+                            </Button>}
                         </Box>
                     </Flex>
                     <Box>

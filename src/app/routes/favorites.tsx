@@ -1,10 +1,10 @@
 import {Box, Container, Flex, Link} from "@radix-ui/themes";
 import {PeachflixLogo} from "@/components/ui/peachflix-logo.tsx";
 import {MovieSearchField} from "@/features/search/components/movie-search-field.tsx";
-import {MovieSearchResultsList} from "@/features/search/components/movie-search-results-list.tsx";
+import {FavoritesList} from "@/features/favorites/components/favorites-list.tsx";
 
-export const SearchResultsRoute = ()=>{
-    return(
+export const FavoritesRoute = () => {
+    return (
         <>
             <Box pt="32px" px="32px">
                 <Flex justify="between">
@@ -20,7 +20,7 @@ export const SearchResultsRoute = ()=>{
             </Box>
             <Box mt="130px">
                 <Container size="4">
-                    <MovieSearchResultsList/>
+                    <FavoritesList/>
                 </Container>
             </Box>
         </>

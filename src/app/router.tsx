@@ -18,6 +18,13 @@ const router = createBrowserRouter([
             return { Component: SearchResultsRoute };
         },
     },
+    {
+        path: '/favorites',
+        lazy: async () => {
+            const { FavoritesRoute } = await import('./routes/favorites.tsx');
+            return { Component: FavoritesRoute };
+        },
+    },
 ]);
 export const AppRouter = () => {
 
