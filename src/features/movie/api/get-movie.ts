@@ -8,16 +8,15 @@ export const getMovie = async (movieIMDbId: string ): Promise<MovieDetails> => {
     return results.data
 }
 
-export const movieQueryOptions = (movieIMDbId: string | null) => {
+export const movieQueryOptions = (movieIMDbId: string) => {
     return queryOptions({
         queryKey: ['movie', movieIMDbId],
         queryFn: () => getMovie(movieIMDbId as string),
-        enabled: movieIMDbId !== null
     })
 }
 
 type useMovieSearchQueryOptions = {
-    movieIMDbId: string | null;
+    movieIMDbId: string;
     queryConfig?: QueryConfig<typeof movieQueryOptions>
 }
 

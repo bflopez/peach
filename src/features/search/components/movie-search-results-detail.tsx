@@ -1,10 +1,10 @@
 import {Box, Button, Dialog, Flex, Text} from "@radix-ui/themes";
 import {StarFilledIcon, StarIcon} from "@radix-ui/react-icons";
-import {useMovieQuery} from "@/features/movie-detail/api/get-movie.ts";
-import {useLocalStorage} from "usehooks-ts";
+import {useMovieQuery} from "@/features/movie/api/get-movie.ts";
+import {useFavorites} from "@/features/favorites/api/get-favorites.ts";
 
-export const MovieDetailDialogContent = ({movieDetailId}: {movieDetailId:string}) => {
-    const [favorites, setFavorite] = useLocalStorage("peachflix-favorites", [] as string[]);
+export const MovieSearchResultsDetail = ({movieDetailId}: {movieDetailId:string}) => {
+    const [favorites, setFavorite] = useFavorites()
     const {data: movieDetails, isLoading} = useMovieQuery({movieIMDbId: movieDetailId})
     const handleAddToFavorite = () => {
         favorites.push(movieDetailId)

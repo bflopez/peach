@@ -1,14 +1,15 @@
-import {useMovieQuery} from "@/features/movie-detail/api/get-movie.ts";
+import {useMovieQuery} from "@/features/movie/api/get-movie.ts";
+import {Box, Skeleton} from "@radix-ui/themes";
 
 export const Favorite = ({favoriteImdbId}: {favoriteImdbId: string}) => {
     const { data: movie, isLoading } = useMovieQuery({movieIMDbId: favoriteImdbId});
-    if (isLoading) return <>Loading...</>;
+    if (isLoading) return <Skeleton><Box height="248px"></Box></Skeleton>;
     if (!movie) return null;
     return (
-        <>
-            <img style={{height: "100%", objectFit: "cover", borderRadius: "8px"}}
+        <Box>
+            <img style={{height: "248px", objectFit: "cover", borderRadius: "8px"}}
                  src={movie.Poster} alt={`Poster for ${movie.Title}`}/>
-        </>
+        </Box>
     )
 
 }

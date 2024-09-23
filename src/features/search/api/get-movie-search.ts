@@ -11,7 +11,8 @@ export const getMovieSearch = async ({searchQuery}:{ searchQuery: string }): Pro
 export const movieSearchQueryOptions = (searchQuery: string) => {
     return queryOptions({
         queryKey: ['movie-search', searchQuery],
-        queryFn: () => getMovieSearch({searchQuery})
+        queryFn: () => getMovieSearch({searchQuery}),
+        enabled: searchQuery.length > 0
     })
 }
 
