@@ -46,14 +46,12 @@ export const MovieSearchResultsList = () => {
             <Grid columns="5" gapY="4" gapX="2" width="auto">
                 <Dialog.Root>
                     {movieSearchResults.Search.map((movie) => (
-                        <Box key={movie.imdbID}>
-                            <Dialog.Trigger>
-                                <a onClick={() => handleMovieClick(movie.imdbID)}>
-                                    <img style={{height: "352px", objectFit: "cover", borderRadius: "8px"}}
-                                         src={movie.Poster === "N/A" ? "https://placehold.co/220x352?text=No+Image+Available" : movie.Poster} alt={`Poster for ${movie.Title}`}/>
-                                </a>
-                            </Dialog.Trigger>
-                        </Box>
+                        <Dialog.Trigger key={movie.imdbID}>
+                            <a tabIndex={0} style={{cursor: "pointer"}} onClick={() => handleMovieClick(movie.imdbID)}>
+                                <img style={{height: "352px", objectFit: "cover", borderRadius: "8px"}}
+                                     src={movie.Poster === "N/A" ? "https://placehold.co/220x352?text=No+Image+Available" : movie.Poster} alt={`Poster for ${movie.Title}`}/>
+                            </a>
+                        </Dialog.Trigger>
                     ))}
                     {imdbId ? <MovieSearchResultsDetail imdbId={imdbId}/> : null}
                 </Dialog.Root>

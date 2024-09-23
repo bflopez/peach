@@ -8,7 +8,8 @@ body{
   --color-background: var(--my-background-color);
   --peachflix-brand-primary: #FD6E1D;
   --orange-9: var(--peachflix-brand-primary);
-  --font-size-9: 80px
+  --font-size-9: 80px;
+  --cursor-button: pointer;
 }
 img {
   max-width: 100%;
