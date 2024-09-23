@@ -51,7 +51,7 @@ export const MovieSearchResultsList = () => {
                             <Dialog.Trigger>
                                 <a onClick={() => handleMovieClick(movie.imdbID)}>
                                     <img style={{height: "352px", objectFit: "cover", borderRadius: "8px"}}
-                                         src={movie.Poster} alt={`Poster for ${movie.Title}`}/>
+                                         src={movie.Poster === "N/A" ? "https://placehold.co/220x352?text=No+Image+Available" : movie.Poster} alt={`Poster for ${movie.Title}`}/>
                                 </a>
                             </Dialog.Trigger>
                         </Box>
