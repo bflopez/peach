@@ -60,5 +60,5 @@ isn't already being used. I am sure there are a few more things that will come t
 3. [ ] Check for accessibility issues
 4. [ ] Clean up styling and further customize Radix UI Theme
 5. [ ] Find alternative API and/or build own API to hide API key
-6. [ ] Add CONSTANTS
+6. [ ] Add CONSTANTS where needed
 7. [ ] Create CONSTANT file for TanStack Query keys
