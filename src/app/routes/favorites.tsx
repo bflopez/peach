@@ -3,7 +3,7 @@ import {ContentLayout} from "@/components/layouts/content-layout.tsx";
 
 export const FavoritesRoute = () => {
     return (
-        <ContentLayout>
+        <ContentLayout heading={'Favorites'}>
             <FavoritesList/>
         </ContentLayout>
     )

@@ -1,9 +1,14 @@
-import {Box, Container, Flex, Link} from "@radix-ui/themes";
+import {Box, Container, Flex, Link, Text} from "@radix-ui/themes";
 import {PeachflixLogo} from "@/components/ui/peachflix-logo.tsx";
 import {MovieSearchField} from "@/features/search/components/movie-search-field.tsx";
 import {ReactNode} from "react";
 
-export const ContentLayout = ({children}: {children: ReactNode})=>{
+type ContentLayoutProps = {
+    heading: string;
+    children: ReactNode;
+}
+export const ContentLayout = (props: ContentLayoutProps)=>{
+    const {heading, children} = props;
     return (
         <>
             <Box pt="32px" px="32px">
@@ -20,6 +25,7 @@ export const ContentLayout = ({children}: {children: ReactNode})=>{
             </Box>
             <Box mt="130px">
                 <Container size="4">
+                    <Text as="p" size="6" weight="medium" mb="4">{heading}</Text>
                     {children}
                 </Container>
             </Box>

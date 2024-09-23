@@ -13,27 +13,26 @@ const MovieSearchResultsListLoading = ({searchQuery}: {searchQuery: string}) => 
     </>
 )
 
+const MovieSearchResultsListError = ({errorText}: {errorText: string}) => (
+    <>
+        <Text as="p" size="6" weight="medium" mb="4">Error: {errorText}</Text>
+        <Text as="p" weight="medium" mb="4">Check your search or try again.</Text>
+    </>
+)
+
 export const MovieSearchResultsList = () => {
+    const [imdbId, setImdbId] = useState<string | null>(null)
     const [searchParams] = useSearchParams();
-    const [movieDetailId, setMovieDetailId] = useState<string | null>(null)
     const searchQuery = searchParams.get("q") || "";
     const {data: movieSearchResults, isLoading} = useMovieSearchQuery({searchQuery: searchQuery});
     const handleMovieClick = (movieIMDbId: string) => {
-        setMovieDetailId(movieIMDbId)
+        setImdbId(movieIMDbId)
     }
     if (isLoading) return <MovieSearchResultsListLoading searchQuery={searchQuery} />
-    if(movieSearchResults?.Response === "False"){
-        return (
-            <>
-                <Text as="p" size="6" weight="medium" mb="4">Error: {movieSearchResults.Error}</Text>
-                <Text as="p" weight="medium" mb="4">Check your search or try again.</Text>
-            </>
-        )
-    }
+    if(movieSearchResults?.Error) return <MovieSearchResultsListError errorText={movieSearchResults?.Error}/>
     if (!movieSearchResults?.Search) return null;
     return (
         <>
-            <Text as="p" size="6" weight="medium" mb="4">{`Search results for "${searchQuery}"`}</Text>
             <Grid columns="5" gapY="4" gapX="2" width="auto">
                 <Dialog.Root>
                     {movieSearchResults.Search.map((movie) => (
@@ -46,7 +45,7 @@ export const MovieSearchResultsList = () => {
                             </Dialog.Trigger>
                         </Box>
                     ))}
-                    {movieDetailId ? <MovieSearchResultsDetail movieDetailId={movieDetailId}/> : null}
+                    {imdbId ? <MovieSearchResultsDetail imdbId={imdbId}/> : null}
                 </Dialog.Root>
             </Grid>
         </>

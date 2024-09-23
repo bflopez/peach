@@ -1,19 +1,10 @@
 import {Box, Button, Dialog, Flex, Text} from "@radix-ui/themes";
 import {StarFilledIcon, StarIcon} from "@radix-ui/react-icons";
 import {useMovieQuery} from "@/features/movie/api/get-movie.ts";
-import {useFavorites} from "@/features/favorites/api/get-favorites.ts";
+import {FavoriteButton} from "@/features/favorites/components/favorite-button.tsx";
 
-export const MovieSearchResultsDetail = ({movieDetailId}: {movieDetailId:string}) => {
-    const [favorites, setFavorite] = useFavorites()
-    const {data: movieDetails, isLoading} = useMovieQuery({movieIMDbId: movieDetailId})
-    const handleAddToFavorite = () => {
-        favorites.push(movieDetailId)
-        setFavorite(favorites)
-    }
-    const handleRemoveFromFavorite = () => {
-        favorites.splice(favorites.indexOf(movieDetailId), 1)
-        setFavorite(favorites)
-    }
+export const MovieSearchResultsDetail = ({imdbId}: {imdbId:string}) => {
+    const {data: movieDetails, isLoading} = useMovieQuery({movieIMDbId: imdbId})
     if(isLoading) { return <Dialog.Content><>Loading...</></Dialog.Content>}
     if(!movieDetails) return null
     return (
@@ -59,13 +50,7 @@ export const MovieSearchResultsDetail = ({movieDetailId}: {movieDetailId:string}
                             <Button size="3" radius={"large"} style={{fontWeight: 600}}>Start watching</Button>
                         </Box>
                         <Box>
-                            {favorites.includes(movieDetails.imdbID) ?
-                                <Button size="3" radius={"large"} variant="outline" style={{fontWeight: 600, color: "#FAFAFA", boxShadow: "inset 0 0 0 2px #FAFAFA"}} onClick={handleRemoveFromFavorite}>
-                                    <StarFilledIcon height="19px" width="18px"/> Remove from favorites
-                                </Button>
-                                :<Button size="3" radius={"large"} variant="outline" style={{fontWeight: 600, color: "#FAFAFA", boxShadow: "inset 0 0 0 2px #FAFAFA"}} onClick={handleAddToFavorite}>
-                                <StarFilledIcon height="19px" width="18px"/> Add to favorites
-                            </Button>}
+                            <FavoriteButton imdbId={imdbId}/>
                         </Box>
                     </Flex>
                     <Box>
