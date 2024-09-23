@@ -46,7 +46,7 @@ accessibility by making sure the app was tabbable.
 
 With more time I would have liked to create a better pagination solution. Although react-headless-pagination seems to be
 a good library I do not feel like it fits into the project as easily as a custom solution. I also think I could improve
-loading states for the movie details dialog. I would take some of the extra time to do a thorough analysis on
+loading states for the movie details dialog or prefetch the data on hover. I would take some of the extra time to do a thorough analysis on
 accessibility. I would also take some time to clean up the styling and customize the Radix UI theme where needed. I also
 felt like the OMDb API was lacking in some areas. For example with error handling and being properly RESTful. With more
 time I would consider using a different API. It would also make sense to create a backend to handle the API in order to
@@ -56,7 +56,7 @@ isn't already being used. I am sure there are a few more things that will come t
 
 ## Areas To Improve List
 1. [ ] Improve Pagination
-2. [ ] Add loading state to Movie Details Dialog
+2. [ ] Add loading state to Movie Details Dialog and possibly prefetch
 3. [ ] Check for accessibility issues
 4. [ ] Clean up styling and further customize Radix UI Theme
 5. [ ] Find alternative API and/or build own API to hide API key
