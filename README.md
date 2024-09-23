@@ -15,11 +15,8 @@ VITE_OMBD_API_KEY = XXXXXXXX
 Next install dependencies and run project
 
 ```js
-npm
-install
-npm
-run
-dev
+npm install
+npm run dev
 ```
 ## Overview
 
